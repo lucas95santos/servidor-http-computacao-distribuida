@@ -11,6 +11,7 @@ public class Cliente {
 
             // teste System.out.println("Input: " + input);
             
+            //tratando a string recebida
             String inputCGI[] = input.split("\\|");
             String cgi = inputCGI[0];
 
@@ -28,11 +29,23 @@ public class Cliente {
             System.out.println("Parametro: " + parametro1);
             System.out.println("Valor: " + valor1);*/
 
+            //abrindo socket para servidor conectar
             Socket clientSocket = new Socket("localhost", 6789); 
 		
 		    DataOutputStream outToServer = new DataOutputStream(clientSocket.getOutputStream());
 		
-		    BufferedReader inFromServer = new BufferedReader(new InputStreamReader(clientSocket.getInputStream())); 
+		    BufferedReader inFromServer = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+
+            //criando processo
+            ProcessBuilder pb = new ProcessBuilder(input);
+
+            //passabdo parametros da string para as variaveis de ambiente
+            Map<String, String> env = pb.enviroment();
+            env.put("PARAM1", "PARAM1_VALUE");
+            env.put("PARAM1", "PARAM1_VALUE");
+
+            //startando processo - mas ainda não sei pra que vamos usar exatamente
+            Process proc = pb.start();
         }
     }
 }
