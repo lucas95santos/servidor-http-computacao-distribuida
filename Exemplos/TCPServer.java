@@ -23,7 +23,15 @@ class TCPServer {
 
 			while (true) {
 				clientSentence = inFromClient.readLine();
+				//------------------------------------------------------
+				//lendo o método que veio pela requisição
+				String metodoSolicitado[] = clientSentence.split("<sp>");
+				String metodoSolicitado = metodoSolicitado[0];
 
+				//lendo o nome do arquivo que veio pela requisição
+				String documentoSolicitado[] = metodoSolicitado[1].split("<sp>");
+				String documentoSolicitado = documentoSolicitado[0];
+				//------------------------------------------------------
 				if (clientSentence == null)
 					break;
 				
